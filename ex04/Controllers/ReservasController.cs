@@ -50,6 +50,34 @@ namespace ex04.Controllers
             return reserva;
         }
 
+        // GET: api/Reservas/Comienzo/fecha
+        [HttpGet("Comienzo/{fecha}")]
+        public async Task<ActionResult<IEnumerable<Reserva>>> GetReservaComienzo(DateTime fecha)
+        {
+            var reservas = await _context.reservas.Where(e => e.comienzo == fecha).ToListAsync();
+
+            if (reservas == null || !reservas.Any())
+            {
+                return NotFound();
+            }
+
+            return reservas;
+        }
+
+        // GET: api/Reservas/Fin/fecha
+        [HttpGet("Fin/{fecha}")]
+        public async Task<ActionResult<IEnumerable<Reserva>>> GetReservaFin(DateTime fecha)
+        {
+            var reservas = await _context.reservas.Where(e => e.fin == fecha).ToListAsync();
+
+            if (reservas == null || !reservas.Any())
+            {
+                return NotFound();
+            }
+
+            return reservas;
+        }
+
         // PUT: api/Reservas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
