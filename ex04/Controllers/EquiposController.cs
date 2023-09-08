@@ -50,6 +50,20 @@ namespace ex04.Controllers
             return equipo;
         }
 
+        // GET: api/Equipos/nombre
+        [HttpGet("Nombre/{nombre}")]
+        public async Task<ActionResult<Equipo>> GetEquipoNombre(string nombre)
+        {
+            var equipo = await _context.equipos.FirstOrDefaultAsync(e => e.nombre == nombre);
+
+            if (equipo == null)
+            {
+                return NotFound();
+            }
+
+            return equipo;
+        }
+
         // PUT: api/Equipos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
