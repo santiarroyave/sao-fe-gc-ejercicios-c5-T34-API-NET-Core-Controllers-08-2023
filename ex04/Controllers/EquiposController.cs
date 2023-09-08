@@ -50,7 +50,7 @@ namespace ex04.Controllers
             return equipo;
         }
 
-        // GET: api/Equipos/nombre
+        // GET: api/Equipos/Nombre/nombre
         [HttpGet("Nombre/{nombre}")]
         public async Task<ActionResult<Equipo>> GetEquipoNombre(string nombre)
         {

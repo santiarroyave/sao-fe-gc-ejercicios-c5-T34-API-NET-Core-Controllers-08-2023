@@ -50,6 +50,20 @@ namespace ex04.Controllers
             return reserva;
         }
 
+        // GET: api/Reservas/Comienzo/fecha
+        [HttpGet("Comienzo/{fecha}")]
+        public async Task<ActionResult<Reserva>> GetReservaComienzo(DateTime fecha)
+        {
+            var reserva = await _context.reservas.FirstOrDefaultAsync(e => e.comienzo == fecha);
+
+            if (reserva == null)
+            {
+                return NotFound();
+            }
+
+            return reserva;
+        }
+
         // PUT: api/Reservas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
