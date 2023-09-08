@@ -52,30 +52,30 @@ namespace ex04.Controllers
 
         // GET: api/Reservas/Comienzo/fecha
         [HttpGet("Comienzo/{fecha}")]
-        public async Task<ActionResult<Reserva>> GetReservaComienzo(DateTime fecha)
+        public async Task<ActionResult<IEnumerable<Reserva>>> GetReservaComienzo(DateTime fecha)
         {
-            var reserva = await _context.reservas.FirstOrDefaultAsync(e => e.comienzo == fecha);
+            var reservas = await _context.reservas.Where(e => e.comienzo == fecha).ToListAsync();
 
-            if (reserva == null)
+            if (reservas == null || !reservas.Any())
             {
                 return NotFound();
             }
 
-            return reserva;
+            return reservas;
         }
 
         // GET: api/Reservas/Fin/fecha
         [HttpGet("Fin/{fecha}")]
-        public async Task<ActionResult<Reserva>> GetReservaFin(DateTime fecha)
+        public async Task<ActionResult<IEnumerable<Reserva>>> GetReservaFin(DateTime fecha)
         {
-            var reserva = await _context.reservas.FirstOrDefaultAsync(e => e.fin == fecha);
+            var reservas = await _context.reservas.Where(e => e.fin == fecha).ToListAsync();
 
-            if (reserva == null)
+            if (reservas == null || !reservas.Any())
             {
                 return NotFound();
             }
 
-            return reserva;
+            return reservas;
         }
 
         // PUT: api/Reservas/5

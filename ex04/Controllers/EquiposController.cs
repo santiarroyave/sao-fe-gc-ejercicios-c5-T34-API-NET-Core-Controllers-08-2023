@@ -52,16 +52,16 @@ namespace ex04.Controllers
 
         // GET: api/Equipos/Nombre/nombre
         [HttpGet("Nombre/{nombre}")]
-        public async Task<ActionResult<Equipo>> GetEquipoNombre(string nombre)
+        public async Task<ActionResult<IEnumerable<Equipo>>> GetEquipoNombre(string nombre)
         {
-            var equipo = await _context.equipos.FirstOrDefaultAsync(e => e.nombre == nombre);
+            var equipos = await _context.equipos.Where(e => e.nombre == nombre).ToListAsync();
 
-            if (equipo == null)
+            if (equipos == null || !equipos.Any())
             {
                 return NotFound();
             }
 
-            return equipo;
+            return equipos;
         }
 
         // PUT: api/Equipos/5
